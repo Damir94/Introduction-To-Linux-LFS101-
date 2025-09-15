@@ -1,3 +1,4 @@
+
 **Learning Objectives**
 
 By the end of this chapter, you should be able to:
@@ -44,4 +45,5 @@ In subsequent sections of this course we will concentrate in great detail on the
 
 **Graphical Desktop Background**
  - Each Linux distribution comes with its own set of desktop backgrounds. You can change the default by choosing a new wallpaper or selecting a custom picture to be set as the desktop background. If you do not want to use an image as the background, you can select a color to be displayed on the desktop instead. 
+
 
