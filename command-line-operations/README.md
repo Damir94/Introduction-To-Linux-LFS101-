@@ -27,7 +27,6 @@ If your system does not already have sudo set up and enabled, you need to do the
    You will then be prompted for the root password, so enter it and press Enter. You will notice that nothing is printed; this is so others cannot see the password on the screen.
    You should end up with a different looking prompt, often ending with ‘#’. For example:
     - $ su Password:
-    - #
  - Now, you need to create a configuration file to enable your user account to use sudo.
    Typically, this file is created in the /etc/sudoers.d/ directory with the name of the file the same as your username.
    For example, for this demo, let’s say your username is student.
@@ -35,7 +34,7 @@ If your system does not already have sudo set up and enabled, you need to do the
     - # echo "student ALL=(ALL) ALL" > /etc/sudoers.d/student
       
  - Finally, some Linux distributions will complain if you do not also change permissions on the file by doing:
-    - # chmod 440 /etc/sudoers.d/student
+    - *chmod 440 /etc/sudoers.d/student*
       
  - That should be it. For the rest of this course, if you use sudo you should be properly set up.
    When using sudo, by default you will be prompted to give a password (your own user password) at least the first time you do it within a specified time interval.
@@ -46,7 +45,7 @@ If your system does not already have sudo set up and enabled, you need to do the
 The init process will then control shutting down or rebooting the system. It is important to always shut down properly; failure to do so can result in damage to the system and/or loss of data.
 The halt and poweroff commands issue shutdown -h to halt the system; reboot issues shutdown -r and causes the machine to reboot instead of just shutting down. Both rebooting and shutting down from the command line requires superuser (root) access.
 When administering a multi-user system, you have the option of notifying all users prior to shutdown, as in:
- - # $ sudo shutdown -h 10:00 "Shutting down for scheduled maintenance."
+ - *$ sudo shutdown -h 10:00 "Shutting down for scheduled maintenance."*
 
 *Locating Applications*
  - Depending on the specifics of your particular distribution's policy, programs and software packages can be installed in various directories. In general, executable programs and scripts should live in the /bin, /usr/bin, /sbin, /usr/sbin directories, or somewhere under /opt. They can also appear in /usr/local/bin and /usr/local/sbin, or in a directory in a user's account space, such as /home/student/bin.
@@ -122,3 +121,53 @@ Unlike hard links, soft links can point to objects even on different filesystems
  - This sets the myfile file's timestamp to 4 p.m., December 9th (12 09 1600).
 
 <img width="558" height="220" alt="Screenshot 2025-09-16 at 12 14 22 PM" src="https://github.com/user-attachments/assets/97160cb1-05e0-4125-8466-e99c1955f377" />
+
+*mkdir and rmdir*
+ - mkdir is used to create a directory:
+    - *mkdir sampdir* - It creates a sample directory named sampdir under the current directory.
+    - *mkdir /usr/sampdir* - It creates a sample directory called sampdir under /usr.
+    - Removing a directory is done with rmdir. The directory must be empty or the command will fail. To remove a directory and all of its contents you have to do rm -rf.
+
+ <img width="1920" height="1080" alt="Screenshot 2025-09-16 at 10 57 50 AM" src="https://github.com/user-attachments/assets/97317e7e-e900-4d5b-857a-bc3f671ac64f" />
+
+*Moving, Renaming or Removing a File*
+ - Note that mv does double duty, in that it can:
+    - Simply rename a file
+    - Move a file to another location, while possibly changing its name at the same time.
+ - If you are not certain about removing files that match a pattern you supply, it is always good to run rm interactively (rm –i) to prompt before every removal.
+   
+<img width="1108" height="250" alt="Screenshot 2025-09-16 at 12 22 51 PM" src="https://github.com/user-attachments/assets/9e38a55e-2f80-466b-97f5-a7a03323f157" />
+
+<img width="1112" height="208" alt="Screenshot 2025-09-16 at 12 24 32 PM" src="https://github.com/user-attachments/assets/5d39446a-cefb-4d42-ae01-3b444d43d97a" />
+
+<img width="1146" height="573" alt="Screenshot 2025-09-16 at 12 25 18 PM" src="https://github.com/user-attachments/assets/d0a472b5-7875-403c-9bf2-0bbc1143c105" />
+
+<img width="1156" height="644" alt="Screenshot 2025-09-16 at 12 25 53 PM" src="https://github.com/user-attachments/assets/b5a47c19-3ecf-4dc1-877f-1526443ac0c6" />
+
+<img width="1149" height="776" alt="Screenshot 2025-09-16 at 12 26 21 PM" src="https://github.com/user-attachments/assets/916d62fe-7ae8-42f9-a85d-5333582d3110" />
+
+<img width="1192" height="675" alt="Screenshot 2025-09-16 at 12 26 44 PM" src="https://github.com/user-attachments/assets/e8e2aa56-e74d-4583-9129-3eef8eacccf6" />
+
+<img width="1138" height="397" alt="Screenshot 2025-09-16 at 12 27 20 PM" src="https://github.com/user-attachments/assets/f8b97f3b-c9d2-4691-8d32-330c0178d0af" />
+
+<img width="1172" height="576" alt="Screenshot 2025-09-16 at 12 27 46 PM" src="https://github.com/user-attachments/assets/2b331cf5-17b2-45d6-8e29-abbf9a148b54" />
+
+<img width="1132" height="337" alt="Screenshot 2025-09-16 at 12 28 25 PM" src="https://github.com/user-attachments/assets/42da243d-622a-42cb-bb84-bd25820b0a5e" />
+
+<img width="1161" height="720" alt="Screenshot 2025-09-16 at 12 28 52 PM" src="https://github.com/user-attachments/assets/ae8be44d-c1e5-4578-9c97-a549bb6bb02c" />
+
+<img width="1164" height="603" alt="Screenshot 2025-09-16 at 12 29 18 PM" src="https://github.com/user-attachments/assets/64c13ef5-06bb-48c2-96cc-4f0b3d011d4d" />
+
+<img width="1163" height="577" alt="Screenshot 2025-09-16 at 12 29 41 PM" src="https://github.com/user-attachments/assets/da638842-7282-42df-a325-83cd8826c8c6" />
+
+<img width="1152" height="367" alt="Screenshot 2025-09-16 at 12 30 15 PM" src="https://github.com/user-attachments/assets/d8e9837f-e34e-4b36-86db-071abb78d9c4" />
+
+<img width="1135" height="744" alt="Screenshot 2025-09-16 at 12 30 39 PM" src="https://github.com/user-attachments/assets/681bf8f1-49f3-4b15-b391-1cd95d6f2b1e" />
+
+<img width="1177" height="693" alt="Screenshot 2025-09-16 at 12 31 10 PM" src="https://github.com/user-attachments/assets/7d796ace-b03e-41b8-9626-42dbaf2bd34e" />
+
+<img width="1201" height="593" alt="Screenshot 2025-09-16 at 12 31 30 PM" src="https://github.com/user-attachments/assets/26e71179-20dd-4b82-9ee1-3d399d98c04d" />
+
+
+
+
