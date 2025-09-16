@@ -40,3 +40,59 @@ If your system does not already have sudo set up and enabled, you need to do the
  - That should be it. For the rest of this course, if you use sudo you should be properly set up.
    When using sudo, by default you will be prompted to give a password (your own user password) at least the first time you do it within a specified time interval.
   It is possible (though very insecure) to configure sudo to not require a password or change the time window in which the password does not have to be repeated with every sudo command.
+
+*Rebooting and Shutting Down*
+The preferred method to shut down or reboot the system is to use the shutdown command. This sends a warning message, and then prevents further users from logging in. 
+The init process will then control shutting down or rebooting the system. It is important to always shut down properly; failure to do so can result in damage to the system and/or loss of data.
+The halt and poweroff commands issue shutdown -h to halt the system; reboot issues shutdown -r and causes the machine to reboot instead of just shutting down. Both rebooting and shutting down from the command line requires superuser (root) access.
+When administering a multi-user system, you have the option of notifying all users prior to shutdown, as in:
+ - # $ sudo shutdown -h 10:00 "Shutting down for scheduled maintenance."
+
+*Locating Applications*
+Depending on the specifics of your particular distribution's policy, programs and software packages can be installed in various directories. In general, executable programs and scripts should live in the /bin, /usr/bin, /sbin, /usr/sbin directories, or somewhere under /opt. They can also appear in /usr/local/bin and /usr/local/sbin, or in a directory in a user's account space, such as /home/student/bin.
+
+One way to locate programs is to employ the which utility. For example, to find out exactly where the diff program resides on the filesystem:
+ - # $ which diff
+   # /usr/bin/diff
+   
+If which does not find the program, whereis is a good alternative because it looks for packages in a broader range of system directories:
+ - # $ whereis diff
+   # diff: /usr/bin/diff /usr/share/man/man1/diff.1.gz /usr/share/man/man1p/diff.1p.gz
+
+*Accessing Directories*
+When you first log into a system or open a terminal, the default directory should be your home directory. You can see the exact location by typing echo $HOME. However, most Linux distributions open new graphical terminals in $HOME/Desktop instead.
+
+<img width="1100" height="242" alt="Screenshot 2025-09-16 at 11 55 53 AM" src="https://github.com/user-attachments/assets/65f64589-bd98-4557-91ef-98f18656b76e" />
+
+*Understanding Absolute and Relative Paths*
+
+ - Absolute pathname - An absolute pathname begins with the root directory (/) and follows the tree, branch by branch, until it reaches the desired directory or file. Absolute paths always start with /.
+ - Relative pathname - A relative pathname starts from the present working directory. Relative paths never start with /.
+
+Multiple slashes (/) between directories and files are allowed, but all but one slash between elements in the pathname is ignored by the system. While ////usr//bin is valid, it is seen as just /usr/bin by the system. 
+Most of the time, it is most convenient to use relative paths, which require less typing. Usually, you take advantage of the shortcuts provided by: . (present directory), .. (parent directory) and ~ (your home directory).
+For example, suppose you are currently working in your home directory and wish to move to the /usr/bin directory. The following two ways will bring you to the same directory from your home directory:
+ - #Absolute pathname method - $ cd /usr/bin
+ - # Relative pathname method - $ cd ../../usr/bin
+   
+<img width="770" height="534" alt="Screenshot 2025-09-16 at 11 59 26 AM" src="https://github.com/user-attachments/assets/62910ff1-9fc9-4b78-9760-6b14164407e7" />
+
+*Exploring the Filesystem*
+Traversing up and down the filesystem tree can get tedious. The tree command is a good way to get a bird’s-eye view of the filesystem tree. Use tree -d to view just the directories and to suppress listing file names.
+
+<img width="1170" height="262" alt="Screenshot 2025-09-16 at 12 00 24 PM" src="https://github.com/user-attachments/assets/3bad110e-16f0-439d-9fdb-05d86ab9c092" />
+
+*Hard Links*
+The ln utility is used to create hard links and (with the -s option) soft links, also known as symbolic links or symlinks. These two kinds of links are very useful in UNIX-based operating systems.
+Suppose that file1 already exists. A hard link, called file2, is created with the command:
+ - # $ ln file1 file2
+   
+Note that two files now appear to exist. However, a closer inspection of the file listing shows that this is not quite true.
+ - # $ ls -li file1 file2
+
+The -i option to ls prints out in the first column the inode number, which is a unique quantity for each file object. This field is the same for both of these files; what is really going on here is that it is only one file, but it has more than one name associated with it, as is indicated by the 2 that appears in the ls output. Thus, there was already another object linked to file1 before the command was executed.
+
+<img width="638" height="143" alt="Screenshot 2025-09-16 at 12 03 07 PM" src="https://github.com/user-attachments/assets/5e9d8535-1a66-4354-a993-07098abe3c75" />
+
+Hard links are very useful and they save space, but you have to be careful with their use, sometimes in subtle ways. For one thing, if you remove either file1 or file2 in the example, the inode object (and the remaining file name) will remain, which might be undesirable, as it may lead to subtle errors later if you recreate a file of that name.
+If you edit one of the files, exactly what happens depends on your editor; most editors, including vi and gedit, will retain the link by default, but it is possible that modifying one of the names may break the link and result in the creation of two objects.
