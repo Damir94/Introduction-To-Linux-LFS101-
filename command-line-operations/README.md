@@ -128,8 +128,6 @@ Unlike hard links, soft links can point to objects even on different filesystems
     - *mkdir /usr/sampdir* - It creates a sample directory called sampdir under /usr.
     - Removing a directory is done with rmdir. The directory must be empty or the command will fail. To remove a directory and all of its contents you have to do rm -rf.
 
- <img width="1920" height="1080" alt="Screenshot 2025-09-16 at 10 57 50 AM" src="https://github.com/user-attachments/assets/97317e7e-e900-4d5b-857a-bc3f671ac64f" />
-
 *Moving, Renaming or Removing a File*
  - Note that mv does double duty, in that it can:
     - Simply rename a file
@@ -167,6 +165,7 @@ Unlike hard links, soft links can point to objects even on different filesystems
 <img width="1177" height="693" alt="Screenshot 2025-09-16 at 12 31 10 PM" src="https://github.com/user-attachments/assets/7d796ace-b03e-41b8-9626-42dbaf2bd34e" />
 
 <img width="1201" height="593" alt="Screenshot 2025-09-16 at 12 31 30 PM" src="https://github.com/user-attachments/assets/26e71179-20dd-4b82-9ee1-3d399d98c04d" />
+
 
 
 
